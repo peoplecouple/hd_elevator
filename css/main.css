@@ -2,11 +2,24 @@
   outline: 1px solid pink;
 } */
 
+
+body {
+  overflow-x: hidden;
+}
+
+.Wrap {
+  width: 100%;
+  min-width: 1px;
+}
+
 .inner {
   width: 1200px;
   margin: 0 auto;
 }
 
+.mainColor {
+  color: #008850;
+}
 
 .TopBanner {
   background: #008850;
@@ -129,15 +142,138 @@
   right: 35px
 }
 
-
 .Header .top_service {
   float: right;
   margin: 0 70px 0 0;
 }
 
+/* top_service 가 right 여서 쪼그라든 상탠데 안에 있는 자식들도 플롯이어서 같이 쪼그라듬 */
+
+.Header .top_service .project {
+  float: left;
+  margin: 0 20px;
+}
+
+.Header .top_service .project li {
+  display: inline-block;
+  font-size: 15px;
+}
+
+.Header .top_service .project li:hover {
+  color: #008850;
+}
+
+.Header .top_service .project li~li::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 13px;
+  background: #ddd;
+  margin: 0 10px;
+}
+
+.Header .top_service strong:hover {
+  color: #008850;
+}
+
+.Header .top_service strong.on {
+  color: #008850;
+}
+
+.Header .top_service .lan {
+  position: relative;
+  float: left;
+  margin: 0 20px 0 0;
+}
+
+.Header .top_service .lan .arrow {
+  font-size: 10px;
+  vertical-align: 0.2em;
+  /* vertical-align으로 arrow 중간에 줌 */
+}
+
+.Header .top_service .lan .lan_box {
+  display: none;
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1.45;
+  border: 2px solid #008850;
+  color: #444;
+  background: #fff;
+  padding: 20px 30px;
+}
+
+.Header .top_service .lan.on .lan_box {
+  display: block;
+}
+
+.Header .top_service .lan.on .arrow {
+  transform: rotate(180deg);
+}
+
+.Header .top_service .top_search {
+  position: relative;
+  float: left;
+}
+
+.Header .top_service .top_search i {
+  font-size: 21px;
+}
+
+.Header .top_search .search_box {
+  display: none;
+  position: absolute;
+  top: 80px;
+  right: -65px;
+  line-height: 1;
+  border: 1px solid #ddd;
+  background: #fff;
+  text-align: center;
+  padding: 35px 0;
+  width: 550px;
+}
+
+.Header .top_search .search_box.on {
+  display: block;
+}
+
+.Header .top_search .search_box::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 65px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  transform: rotate(45deg);
+}
+
+.Header .top_search .search_box input[type='text'] {
+  font-size: 20px;
+  width: 400px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #444;
+}
+
+.Header .top_search .search_box button {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 30px;
+}
+
+.Header .top_search .search_box button i {
+  font-size: 30px;
+}
+
 .main_slider figure {
   position: relative;
-  height: 900px;
+  height: 100vh;
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -168,14 +304,50 @@
   font-size: 50px;
   font-weight: 900;
   margin: 0 0 20px 0;
+  transform: translateY(100px);
+  opacity: 0;
 }
 
+.main_slider figure.on h2 {
+  transform: translateY(0);
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.main_slider figure span {
+  display: block;
+  margin: 10px 0;
+}
 
 .main_slider figure p {
   font-size: 18px;
   font-weight: 300;
   line-height: 1.45;
   margin: 0 0 50px 0;
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+.main_slider figure.on p {
+  transform: translateY(0);
+  opacity: 1;
+  transition: 0.5s 0.5s;
+}
+
+.main_slider figure a {
+  display: inline-block;
+  padding: 10px 25px;
+  border: 1px solid #f9f9f9;
+  color: #f9f9f9;
+  font-size: 13px;
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+.main_slider figure.on a {
+  transform: translateY(0);
+  opacity: 1;
+  transition: 0.5s 1s;
 }
 
 .Section01 .inner a {
@@ -193,17 +365,19 @@
   transition: 0.5s;
 }
 
-.Section01 {
+.Section01.on {
   padding: 0 0 0 0;
 }
 
-.Section01 .slider_handler button {
+.Section01 .slide_handler button {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* transform: translate(-50%, -50%); */
-  color: #f9f9f9;
-  font-size: 14px;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  font-size: 0px;
   font-weight: 300;
   cursor: pointer;
   background: transparent;
@@ -211,59 +385,53 @@
   outline: none;
 }
 
-.Section01 .slider_handler button:first-child::before {
+.Section01 .slide_handler button::after {
   content: "";
   position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 50px;
-  height: 1px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
   border-top: 1px solid #f9f9f9;
-  transform: translateX(-50%);
+
 }
 
-.Section01 .slider_handler button:first-child::after {
+.Section01 .slide_handler button:first-child::before {
   content: "";
   position: absolute;
-  top: 100%;
-  left: 0%;
-  width: 10px;
-  height: 1px;
+  top: 50%;
+  left: 0;
+  width: 60px;
+  height: 0;
   border-top: 1px solid #f9f9f9;
-  transform: translateX(-50%) rotate(-45deg);
-  transform-origin: left;
 }
 
-.Section01 .slider_handler button:last-child::before {
+.Section01 .slide_handler button:last-child::before {
   content: "";
   position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 50px;
-  height: 1px;
+  top: 50%;
+  right: 0;
+  width: 60px;
+  height: 0;
   border-top: 1px solid #f9f9f9;
-  transform: translateX(-50%);
 }
 
-.Section01 .slider_handler button:last-child::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  right: 0%;
-  width: 10px;
-  height: 1px;
-  border-top: 1px solid #f9f9f9;
-  transform: translateX(50%) rotate(45deg);
-  transform-origin: right;
+.Section01 .slide_handler button:first-child::after {
+  left: 0;
+  transform: rotate(-45deg);
+  transform-origin: left top;
 }
 
-.Section01 .slider_handler button:first-child {
-  float: left;
-  margin: 0 0 0 -700px;
+.Section01 .slide_handler button:last-child::after {
+  right: 0;
+  transform: rotate(45deg);
+  transform-origin: right top;
 }
 
-.Section01 .slider_handler button:last-child {
-  float: right;
+.Section01 .slide_handler button:first-child {
+  margin: 0 0 0 -800px;
+}
+
+.Section01 .slide_handler button:last-child {
   margin: 0 0 0 700px;
 }
 
@@ -276,6 +444,12 @@
   color: #fff;
   font-size: 35px;
 }
+
+.Section01 .num span {
+  font-size: 20px;
+  color: #ddd;
+}
+
 
 .Section01 .slide_dots {
   position: absolute;
@@ -536,6 +710,15 @@ margin 0 auto로 맞춰줌 */
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.25);
 }
 
+.Section04 .case::after {
+  content: "";
+  position: absolute;
+  top: 60px;
+  left: -30px;
+  width: 60px;
+  height: 2px;
+  background: #008850;
+}
 
 .Section04 .content_box strong {
   font-size: 25px;
@@ -626,4 +809,335 @@ margin 0 auto로 맞춰줌 */
 
 .Section04 .center_slider .slick-dots>li button {
   display: none;
+}
+
+.Section05 {
+  padding: 100px 0;
+  background: url(../assets/section4_bg.jpg) no-repeat left bottom;
+  text-align: center;
+}
+
+.Section05 h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.Section05>p {
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.Section05 .inner {
+  position: relative;
+  width: 800px;
+}
+
+/* inner사이즈 줘야 가운데오는 margin이 먹힘 */
+
+
+.Section05 .movie_case {
+  width: 800px;
+  height: 450px;
+  margin: 0 auto 80px auto;
+}
+
+.Section05 .txt {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.Section05 .txt li {
+  float: left;
+  width: 50%;
+}
+
+.Section05 .txt strong {
+  display: block;
+  font-size: 22px;
+  color: #00e085;
+  margin-bottom: 15px;
+}
+
+.Section05 .txt span {
+  display: block;
+  font-size: 15px;
+  color: #f9f9f9;
+}
+
+.Section05 .movie_handler {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.Section05 .movie_handler button {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0;
+}
+
+.Section05 .movie_handler button::after {
+  content: "\ea3b";
+  font-family: 'xeicon';
+  font-size: 50px;
+  color: #fff;
+  background: #008850;
+  padding: 20px;
+  border-radius: 50%;
+}
+
+.Section05 .movie_handler button.on::after {
+  content: "\ea3e";
+  font-family: 'xeicon';
+  font-size: 50px;
+}
+
+.Section06 {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.Section06 h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.Section06>p {
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.Section06 .inner {
+  width: 1230px;
+  /* figure에 패딩으로 양옆 15씩 줘서 1200에서 1230으로 늘림 */
+}
+
+.Section06 .inner figure {
+  float: left;
+  width: calc(100% / 3);
+  padding: 0 15px;
+  text-align: left;
+}
+
+.Section06 .inner figure:hover .title {
+  text-decoration: underline;
+}
+
+.Section06 .inner figure img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  /* object-fit으로 조그라든 이미지를  펴줌 */
+  margin: 0 0 20px 0;
+}
+
+.Section06 .inner figure .sort {
+  display: block;
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #008850;
+}
+
+.Section06 .inner figure .title {
+  margin: 0 0 20px 0;
+  font-size: 21px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.Section06 .inner figure .date {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+
+.Footer {
+  position: relative;
+  border-top: 1px solid #ddd;
+  line-height: 60px;
+}
+
+.Footer .ft_top {
+  border-bottom: 1px solid #ddd;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.Footer ul>li {
+  float: left;
+}
+
+.Footer .ft_top .left {
+  float: left;
+}
+
+.Footer .ft_top .left li~li::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: #ddd;
+  margin: 20px;
+  vertical-align: middle;
+}
+
+.Footer .ft_top .left span {
+  font-size: 20px;
+}
+
+.Footer .ft_top .right {
+  float: right;
+}
+
+.Footer .ft_top .right li a {
+  position: relative;
+  display: block;
+  padding: 0 20px 0 30px;
+}
+
+.Footer .ft_top .right li a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 10px;
+  height: 2px;
+  background: #008850;
+}
+
+.Footer .ft_top .right li a::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 4px);
+  right: 4px;
+  width: 2px;
+  height: 10px;
+  background: #008850;
+}
+
+.Footer .ft_top .right li.on a::after {
+  display: none;
+}
+
+.Footer .ft_top .content {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+}
+
+.Footer .ft_top .content>ul {
+  display: none;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 60px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.Footer .ft_top .content>ul.on {
+  display: block;
+}
+
+.Footer .ft_top .content>ul li {
+  margin: 0 15px;
+}
+
+.Footer .ft_top .content>ul li:first-child {
+  margin-left: 30px;
+}
+
+.Footer .ft_bottom {
+  line-height: 1;
+  padding: 30px 0;
+}
+
+.Footer .ft_bottom .family_link {
+  float: right;
+  padding-top: 7px;
+}
+
+.Footer .ft_bottom .family_link select {
+  background: #444;
+  color: #f9f9f9;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 0 15px;
+}
+
+.Footer .ft_bottom .left {
+  float: left;
+  line-height: 1;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.Footer .ft_bottom .left address {
+  margin-bottom: 5px;
+}
+
+.Footer .ft_bottom .right {
+  float: right;
+}
+
+.Footer .ft_bottom .right i {
+  font-size: 20px;
+  color: #f9f9f9;
+  background: #444;
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+
+.to_top {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  cursor: pointer;
+}
+
+.to_top i {
+  font-size: 40px;
+  padding: 15px;
+  color: #fff;
+  background: #008850;
+  border-radius: 50%;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+}
+
+.popup .pop_case {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup .pop_close{
+  padding: 5px 10px;
+  background: #fff;
+}
+
+.popup .pop_close button{
+  float: right;
+  border: none;
+  background: #008850;
+  color: #fff;
 }

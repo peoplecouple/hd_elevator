@@ -11,8 +11,9 @@ font
 @import url('https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
 
 /* 슬릭 깜박임 해결:브라우즈 업데이트 문제였음 */
-.slick-slide {
-    transform: translate3d(0, 0, 0)
+.slick-track,
+.slick-list {
+    transition-delay: 30ms;
 }
 
 /*
