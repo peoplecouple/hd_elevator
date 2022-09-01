@@ -148,14 +148,15 @@ $(function () {
     $('.popup').hide();
   })
 
-  var getCookie = $.cookie('popup')
+  var getCookie = $.cookie('popup');
+
   if (!getCookie) {
     $('.popup').show();
   }
-
   $('.popup input').on('change', function () {
-
-  })
+    $.cookie('popup', 'value', { expires: 1 });
+    $('.popup').hide();
+  });
 
   ////////////////////////////////////////////////
 })

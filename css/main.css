@@ -1130,12 +1130,12 @@ margin 0 auto로 맞춰줌 */
   transform: translate(-50%, -50%);
 }
 
-.popup .pop_close{
+.popup .pop_close {
   padding: 5px 10px;
   background: #fff;
 }
 
-.popup .pop_close button{
+.popup .pop_close button {
   float: right;
   border: none;
   background: #008850;
